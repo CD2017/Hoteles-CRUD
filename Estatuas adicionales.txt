@@ -1,0 +1,83 @@
+//Ratiorg got statues of different sizes as a present from CodeMaster for his birthday, 
+//each statue having an non-negative integer size. Since he likes to make things perfect, 
+//he wants to arrange them from smallest to largest so that each statue will be bigger 
+//than the previous one exactly by 1. He may need some additional statues to be able to 
+//accomplish that. Help him figure out the minimum number of additional statues needed.
+
+int makeArrayConsecutive2(std::vector<int> statues) {
+    
+    //SET additions equal to 0
+    int additions = 0;
+
+    //IF vector size is equal to 1
+    if(statues.size() == 1)
+        
+        //RETURN 0;
+        return additions;
+    
+    //SORT the vector from least to greatest
+    sort(statues.begin(), statues.end());
+
+    //FOR each element in the vector
+    for(int x = 0; x < (statues.size() - 1); x++)
+        
+        //SUM additions + (difference between each element and subtract 1)
+        additions += ((statues[x + 1] - statues[x]) - 1);
+    
+    //RETURN additions
+    return additions;
+}
+
+//Position: 1515
+---------------------------------------------2----------------------
+
+function makeArrayConsecutive2(arr_statues) {
+    var arr_sortedStatues = sort_leastToGreatest(arr_statues);
+    
+    var arr_missingNumbers = find_missingConsecutiveNumbers(arr_sortedStatues);
+    
+    int_numOfMissingNumbers = arr_missingNumbers.length
+    
+    return int_numOfMissingNumbers;
+}
+
+
+function sort_leastToGreatest(arr_input) {
+    var arr_output = arr_input.sort(function(a,b) {
+        // The sort method is weird, 
+        // seems reversed but this returns in order from least to greatest
+        return a > b;
+    });
+    
+    return arr_output;
+}
+
+
+function find_missingConsecutiveNumbers(arr_input) {
+    var arr_missing = [];
+    
+    var int_lastNumber = arr_input[ arr_input.length - 1];
+    
+    // Create comparison array
+    var arr_comparison = [];
+    
+    for(var i=arr_input[0]; i < int_lastNumber; i++) {
+        arr_comparison.push(i);
+    }
+    
+    // Compare given and comparison arrays
+    for(var j=0; j < arr_comparison.length; j++) {
+        
+        var int_compareNumber = arr_comparison[j];
+        
+        if( arr_input.includes(int_compareNumber) === false ) {
+            arr_missing.push(int_compareNumber);
+        }
+    }
+    
+    return arr_missing;
+}
+
+
+makeArrayConsecutive2(statues)
+
